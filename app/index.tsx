@@ -1,11 +1,18 @@
 import { Text, View } from "react-native";
-import { useEffect } from "react";  
+import { useEffect, useState } from "react";  
+
 export default function Index() {
+
+  const [result, setResults] = useState<any[]>([]);
+
   useEffect(() => {
   console.log("Entre en pantalla");
   getPokemons();
   }, []);
   
+  useEffect(() =>{
+    getPokemons();
+  }, []);
   
     /*async correr todo al mismo tiempo */
     const getPokemons = async() => {
@@ -15,24 +22,22 @@ export default function Index() {
           method: "GET",
         });
         if (response.ok){
-          console.log("request ok");
+          console.log(response);
+          const data = await response.json();
+          setResults(data.results);
         }  else{
               console.log("Bard Request");
             }
             }catch(error){
               console.log("Ocurrio un error")
             }
-    };
-
-
-    console.log("Entre en pantalla");
-
- // }, []);
-  
+    };  
   
   return (
     <View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>{result.map((item) => {
+        return <Text key={item.name}>{item.name}</Text>
+      })} </Text>
     </View>
   );
 }
