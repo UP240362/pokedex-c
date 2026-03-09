@@ -13,7 +13,7 @@ export default function PokemonCard(props: PokemonCardProps) {
 
   return (
     <Pressable
-      onPress={() => router.push("/new-screen")}
+      onPress={() => router.push(`/pokemon/${props.name}`)}
       style={({ pressed }) => [
         style.pressableSheet,
         pressed && {
@@ -36,6 +36,6 @@ const style = StyleSheet.create({
   pressableSheet: {
     borderWidth: 1,
     alignItems: "center",
-    backgroundColor: "cyan",
+    backgroundColor: "light blue",
   },
 });
